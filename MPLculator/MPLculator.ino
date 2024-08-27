@@ -11,6 +11,8 @@
 DNSServer dnsServer;
 AsyncWebServer server(80);
 
+float result = 0.0;
+
 
 
 // list all of the files, if ishtml=true, return html rather than simple text
@@ -52,6 +54,14 @@ String humanReadableSize(const size_t bytes) {
   else if (bytes < (1024 * 1024)) return String(bytes / 1024.0) + " kB";
   else if (bytes < (1024 * 1024 * 1024)) return String(bytes / 1024.0 / 1024.0) + " MB";
   else return String(bytes / 1024.0 / 1024.0 / 1024.0) + " GB";
+}
+
+// web content template processor
+String processor(const String& var)
+{
+  if(var == "RESULT")
+    return String(result);
+  return String();
 }
 
 // handles uploads
@@ -200,7 +210,23 @@ void setupServer() {
     String uri = request->url();
     if (uri.equals("/")) uri = "/index.html";
 
-    request->send(LittleFS, uri); // content type automagically determined by file extension
+    if (request->hasParam("lOperand") && request->hasParam("rOperand") && request->hasParam("operator")) {
+      const String &_lOperand_string = request->getParam("lOperand")->value();
+      const float _lOperand = _lOperand_string.length() == 0 ? result : _lOperand_string.toFloat();
+      const float _rOperand = request->getParam("rOperand")->value().toFloat();
+      const String &_operator = request->getParam("operator")->value();
+
+      if (_operator.equals("add")) {
+        result = _lOperand + _rOperand;
+      } else if (_operator.equals("sub")) {
+        result = _lOperand - _rOperand;
+      } else if (_operator.equals("mul")) {
+        result = _lOperand * _rOperand;
+      } else if (_operator.equals("div")) {
+        result = _lOperand / _rOperand;
+      }
+    }
+    request->send(LittleFS, uri, "", false, processor); // content type automagically determined by file extension
   });
     
   server.onNotFound([](AsyncWebServerRequest *request) {
