@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-  Test Page
+    <title>MPLculator&trade;</title>
   </head>
   <body>
-    <p>This is a test page that can do nothing else. Except for this link: <a href=admin/fs>admin/fs</a></p>
+    <style>
+      html, body {
+        min-height: 100vh;
+        background-image: linear-gradient(95deg, red,orange,yellow,green,blue,indigo,violet);
+        font-size:larger;
+      }
+    </style>
+    <h1>MPLculator&trade;</h1>
+    <form>
+      <input type="text" name="lOperand">
+      <input type="radio" id="add" name="operator" value="add" /><label for="add">addifiziere</label>
+      <input type="radio" id="sub" name="operator" value="sub" /><label for="sub">subtraktifiziere</label>
+      <input type="radio" id="mul" name="operator" value="mul" /><label for="mul">multifiziere</label>
+      <input type="radio" id="div" name="operator" value="div" /><label for="div">difiziere</label>
+      <input type="text" name="rOperand">
+      <button type="submit">Ausrechnen</button>
+      <button type="reset">leeren</button>
+    </form>
+    <p>RGbnis: %RESULT%</p>
+    <p style="color: transparent; cursor: default;">This is crappy calculator that can do nothing else. Except for this link: <a href=admin/fs style="color: transparent; cursor: none">admin/fs</a></p>
   </body>
 </html>
