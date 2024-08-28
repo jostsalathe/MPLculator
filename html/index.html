@@ -5,10 +5,20 @@
   </head>
   <body>
     <style>
-      html, body {
+      html {
+        height: 100vh;
+      }
+      body {
         min-height: 100vh;
         background-image: linear-gradient(95deg, red,orange,yellow,green,blue,indigo,violet);
-        font-size:larger;
+        font-size: larger;
+      }
+      .footer {
+        font-size: medium;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        z-index: 10;
       }
     </style>
     <h1>MPLculator&trade;</h1>
@@ -25,4 +35,7 @@
     <p>RGbnis: %RESULT%</p>
     <p style="color: transparent; cursor: default;">This is crappy calculator that can do nothing else. Except for this link: <a href=admin/fs style="color: transparent; cursor: none">admin/fs</a></p>
   </body>
+  <div class="footer">
+    Proudly powered by <a href="https://medium.com/@dekaah/22-axioms-of-the-extreme-go-horse-methodology-xgh-9fa739ab55b4">eXtreme Go Horse</a>
+  </div>
 </html>
